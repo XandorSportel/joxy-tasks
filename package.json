@@ -1,0 +1,136 @@
+{
+  "name": "joxy-tasks",
+  "displayName": "Tasks",
+  "description": "Run configurable commands from the Activity Bar in a selected workspace folder.",
+  "version": "1.1.0",
+  "publisher": "joxy",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:joxyTasks.taskList"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "joxyTasks.runTask",
+        "title": "Tasks: Run Task"
+      },
+      {
+        "command": "joxyTasks.refresh",
+        "title": "Tasks: Refresh"
+      },
+      {
+        "command": "joxyTasks.openSettings",
+        "title": "Tasks: Configure Tasks"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "joxyTasks",
+          "title": "Tasks",
+          "icon": "resources/tasks.svg"
+        }
+      ]
+    },
+    "views": {
+      "joxyTasks": [
+        {
+          "id": "joxyTasks.taskList",
+          "name": "Tasks"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "joxyTasks.taskList",
+        "contents": "No tasks are configured.\n[Configure Tasks](command:joxyTasks.openSettings)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "joxyTasks.refresh",
+          "when": "view == joxyTasks.taskList",
+          "group": "navigation"
+        },
+        {
+          "command": "joxyTasks.openSettings",
+          "when": "view == joxyTasks.taskList",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Joxy Tasks",
+      "properties": {
+        "joxyTasks.tasks": {
+          "type": "array",
+          "default": [],
+          "description": "Commands shown in the Tasks Activity Bar view.",
+          "scope": "resource",
+          "items": {
+            "type": "object",
+            "required": [
+              "label"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "command"
+                ]
+              },
+              {
+                "required": [
+                  "commands"
+                ]
+              }
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "Text shown in the Tasks view."
+              },
+              "command": {
+                "type": "string",
+                "minLength": 1,
+                "description": "A single shell command to run."
+              },
+              "commands": {
+                "type": "array",
+                "minItems": 1,
+                "description": "Multiple shell commands to run.",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "run": {
+                "type": "string",
+                "enum": [
+                  "parallel",
+                  "sequential"
+                ],
+                "default": "parallel",
+                "description": "How multiple commands are executed. Ignored for a single command."
+              },
+              "description": {
+                "type": "string",
+                "description": "Optional detail shown beside the task."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "check": "node --check extension.js",
+  },
+  "license": "MIT"
+}

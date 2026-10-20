@@ -53,3 +53,23 @@ time; if a command fails, the remaining commands are not started.
 
 Open this directory in VS Code and press `F5` to launch an Extension
 Development Host. Run `npm run check` to perform a JavaScript syntax check.
+
+Package the version declared in `package.json`:
+
+```powershell
+npm run package
+```
+
+Install a packaged version by passing its version number:
+
+```powershell
+npm run install:vsix -- 1.1.0
+```
+
+When the version is omitted, the installer asks for it interactively and uses
+the current `package.json` version as the default. To package and then install
+in one command, run:
+
+```powershell
+npm run deploy
+```

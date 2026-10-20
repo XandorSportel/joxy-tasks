@@ -3,7 +3,11 @@
   "displayName": "Tasks",
   "description": "Run configurable commands from the Activity Bar in a selected workspace folder.",
   "version": "1.1.0",
-  "publisher": "joxy",
+  "publisher": "XandorSportel",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XandorSportel/joxy-tasks"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -130,7 +134,10 @@
     }
   },
   "scripts": {
-    "check": "node --check extension.js",
+    "check": "node --check extension.js && node --check scripts/install-vsix.js",
+    "package": "npx --yes @vscode/vsce package --no-dependencies",
+    "install:vsix": "node scripts/install-vsix.js",
+    "deploy": "npm run package && npm run install:vsix"
   },
   "license": "MIT"
 }

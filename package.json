@@ -2,7 +2,7 @@
   "name": "joxy-tasks",
   "displayName": "Tasks",
   "description": "Run configurable commands from the Activity Bar in a selected workspace folder.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "XandorSportel",
   "repository": {
     "type": "git",

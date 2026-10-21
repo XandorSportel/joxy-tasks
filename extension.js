@@ -200,7 +200,7 @@ function activate(context) {
     vscode.commands.registerCommand('joxyTasks.openSettings', () =>
       vscode.commands.executeCommand(
         'workbench.action.openSettings',
-        '@ext:joxy.joxy-tasks joxyTasks.tasks'
+        '@ext:XandorSportel.joxy-tasks joxyTasks.tasks'
       )
     ),
     vscode.workspace.onDidChangeConfiguration((event) => {
